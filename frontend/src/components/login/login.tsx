@@ -1,8 +1,6 @@
 import { useEffect } from 'react';
-import { Avatar } from 'antd';
 import { Link } from 'react-router-dom';
 
-import avatar from '@assets/avatar-1.svg';
 import { useAppDispatch, useAppSelector } from 'src/app/hooks';
 import { connectKinto, createNewWalletKinto } from 'src/app/reducers/kinto.reducer';
 
@@ -13,24 +11,30 @@ export default function LoginComponent() {
 
     useEffect(() => {
         const interval = setInterval(() => {
-            if (!kintoAccount) dispatch(connectKinto());
-            else clearInterval(interval);
+            dispatch(connectKinto());
         }, 5000);
 
         return () => clearInterval(interval);
     }, [dispatch]);
 
+    function shortenEthereumAddress(address: string) {
+        if (!address || address.length < 8) return address;
+        const start = address.slice(0, 4);
+        const end = address.slice(-4);
+        return `${start}...${end}`;
+    }
+
     return (
         <div>
             {kintoAccount ?
-                < Link to='/profile' style={{ cursor: 'pointer', color: '#000' }}>
-                    <Avatar style={{ backgroundColor: '#000', boxShadow: '3px 3px 0px 0px #F5F300' }} icon={<img src={avatar} />} />
-                    <span style={{ fontSize: '16px', fontWeight: 700, margin: '0 0 0 10px' }}>{kintoAccount.walletAddress}</span>
+                < Link className='button' to='/profile'>
+                    <span style={{ fontSize: '16px', fontWeight: 700, margin: '0 0 0 10px' }}>{shortenEthereumAddress(kintoAccount.walletAddress!)}</span>
                 </Link> :
-                <span className='button' onClick={() => dispatch(createNewWalletKinto())}>
-                    Sign Up
-                </span>
+                null
             }
+            <span className='button' onClick={() => dispatch(createNewWalletKinto())} style={{ margin: '0 10px' }}>
+                New wallet
+            </span>
         </div>
     );
 };
