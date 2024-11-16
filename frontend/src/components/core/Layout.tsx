@@ -5,14 +5,13 @@ import themeDefault from '@styles/theme-default';
 import Login from "@features/login/Login";
 import { Logo } from "./logo/Logo";
 import { UserOutlined } from "@ant-design/icons";
-import avatar from '@assets/avatar-1.svg';
+import LoginComponent from "@components/login/login";
 
 const { Header, Footer, Content } = LayoutAnt;
 
 export function Layout() {
   const locationObj = useLocation();
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
-  const [isAuthorized, setIsAuthorized] = useState(false);
 
   const getActiveMenuKey = (pathname: string) => {
     if (pathname.includes('/profile')) return 'profile';
@@ -52,16 +51,7 @@ export function Layout() {
                 </Menu>
               </Col>
               <Col style={{ textAlign: 'right' }}>
-                {isAuthorized ?
-                  <Link to='/profile' style={{ cursor: 'pointer', color: '#000' }}>
-                    <Avatar style={{ backgroundColor: '#000', boxShadow: '3px 3px 0px 0px #F5F300' }} icon={<img src={avatar} />} />
-                    <span style={{ fontSize: '16px', fontWeight: 700, margin: '0 0 0 10px' }}>Profile</span>
-                  </Link> :
-                  <span className='button' onClick={() => setIsLoginModalOpen(!isLoginModalOpen)}>
-                    Sign Up
-                  </span>
-                }
-
+                <LoginComponent />
               </Col>
             </Row>
             <Modal
@@ -70,7 +60,7 @@ export function Layout() {
               footer={[]}
               zIndex={9}
             >
-              <Login authorizationCompleted={() => { setIsLoginModalOpen(false); setIsAuthorized(true); }} />
+              <Login authorizationCompleted={() => { setIsLoginModalOpen(false); }} />
             </Modal>
           </Header>
           <Content>
@@ -79,6 +69,6 @@ export function Layout() {
           {/* <Footer></Footer> */}
         </LayoutAnt>
       </Space>
-    </ConfigProvider>
+    </ConfigProvider >
   );
 };

@@ -7,7 +7,6 @@ import logoWorldId from '@assets/logo-world-id.svg';
 import logoMetamask from '@assets/logo-metamask.svg';
 import logoTrustWallet from '@assets/logo-trustwallet.svg';
 import { useAuth0 } from "@auth0/auth0-react";
-//import { IDKitWidget } from '@worldcoin/idkit';
 
 function MetamaskLogin(props: { authorizationCompleted?: any }) {
   const [walletAddress, setWalletAddress] = useState<string>("");
@@ -36,46 +35,12 @@ function MetamaskLogin(props: { authorizationCompleted?: any }) {
     const profile = await contract.createProfile()
   }
 
-
-  const worldIdOnSuccess = (e: any) => {
-    console.log('!!! IDKitWidget onSuccess', e);
-    props.authorizationCompleted();
-    //alert('World ID connected successfully!');
-  };
-
-  const worldIdHandleVerify = (e: any) => {
-    console.log('!!! IDKitWidget handleVerify', e);
-  };
-
-
-
   return (
     <div className='login'>
       <div className='title'>Login</div>
       <div style={{ fontSize: '14px' }}>Signing with World ID gives you exclusive benefits, discounts, and extra reputational points for a better NFT to be minted, it also allows you to have a seamless login experience that's why we recommend it.</div>
 
       <div className='wallets'>
-
-        {/* <IDKitWidget
-          app_id="app_staging_05230913fab7e8ffd8f378ba7070975b" // obtained from the Developer Portal
-          action="verify" // this is your action name from the Developer Portal
-          onSuccess={worldIdOnSuccess} // callback when the modal is closed
-          handleVerify={worldIdHandleVerify} // optional callback when the proof is received
-          // redential_types={['orb', 'phone']} 
-          enableTelemetry // optional, defaults to false
-        >
-          {({ open }) => (
-            <div className="wallet" onClick={open}>
-              <img className='icon' src={logoWorldId} alt="World Id" />
-              <div className='name'>
-                <div>World ID</div>
-                <div className='description'>Get +3 reputation point</div>
-              </div>
-              <div className='recommend'>Recommended</div>
-              <RightCircleOutlined />
-            </div>
-          )}
-        </IDKitWidget> */}
 
         <div className="wallet" onClick={connectMetamask}>
           <img className='icon' src={logoMetamask} alt="Metamask" />

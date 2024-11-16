@@ -1,9 +1,11 @@
 import { configureStore, ThunkAction, Action } from "@reduxjs/toolkit"
 import counterReducer from "../features/counter/counterSlice"
+import kintoReducer from "./reducers/kinto.reducer"
 
 export const store = configureStore({
   reducer: {
     counter: counterReducer,
+    kinto: kintoReducer,
   },
 })
 
