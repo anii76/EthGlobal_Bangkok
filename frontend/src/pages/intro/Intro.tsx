@@ -19,9 +19,9 @@ export default function Intro() {
   return (
     <Row className='intro-page' justify='center'>
       <Col xxl={16} xl={16} lg={22} md={22} sm={22} xs={22}>
-        <div className="intro-page__logo">
+        {/* <div className="intro-page__logo">
           <Logo />
-        </div>
+        </div> */}
 
         <Row justify='space-between'>
           <Col md={7} sm={22} xs={22}>
@@ -60,9 +60,9 @@ export default function Intro() {
         </Row>
 
         <div style={{ textAlign: 'center', marginTop: '70px' }}>
-          <Link to="/events">
+          <Link to="/kyc">
             <span className='button'>
-              Browse
+              Go to KYC
               <RightCircleOutlined style={{ fontSize: '24px', verticalAlign: 'middle', margin: '-2px 0 0 40px' }} />
             </span>
           </Link>
